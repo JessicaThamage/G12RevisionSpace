@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 Visual Arts – Revision Space</title>
+<!-- Tabler Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<!-- Google Fonts: Playful & Artistic Sketchbook Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* --- Hand-Crafted Art Studio CSS Style --- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    /* Palette inspired by Laubser's expressionism & traditional South African earth tones */
+    --bg-canvas: #FAF6EE;      /* Warm, textured printmaking paper tone */
+    --bg-surface: #FFFFFF;     /* Fresh canvas white */
+    --bg-muted: #F0E6D2;       /* Diluted clay / wash background */
+    
+    --text-primary: #1C1A17;   /* Deep charcoal ink */
+    --text-secondary: #5C5449; /* Weathered wood / sepia tone */
+    --text-tertiary: #A69B8A;  /* Light graphite grey */
+    
+    /* Vibrant, raw artistic highlights (Non-corporate) */
+    --accent-ochre: #E29578;   /* Warm sun orange / oxide red */
+    --accent-fauve: #3A86C8;   /* Pierneef sky blue */
+    --accent-terracotta: #D35237; /* Dynamic cadmium red */
+    
+    /* Status indicators styling */
+    --success-bg: #E8F5E9; --success-txt: #2E7D32; --success-border: #4CAF50;
+    --danger-bg: #FFEBEE;  --danger-txt: #C62828;  --danger-border: #EF5350;
+    
+    --border-thick: #1C1A17;   /* Bold, hand-drawn ink block lines */
+    --border-thin: #D1C7B7;    /* Charcoal pencil setup line */
+    
+    --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-hand: 'Caveat', cursive;
+  }
+
+  body { 
+    font-family: var(--font-sans); 
+    background-color: var(--bg-canvas); 
+    color: var(--text-primary); 
+    font-size: 15px; 
+    line-height: 1.6; 
+    min-height: 100vh; 
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { 
+    max-width: 840px; 
+    margin: 0 auto; 
+    padding: 2.5rem 1.25rem 5rem; 
+  }
+
+  /* --- Zine / Art Studio Header --- */
+  .app-header { 
+    margin-bottom: 2.5rem; 
+    border: 3px solid var(--border-thick);
+    background: var(--bg-surface);
+    padding: 2rem;
+    box-shadow: 6px 6px 0px var(--border-thick);
+    position: relative;
+    overflow: hidden;
+  }
+  .app-header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, var(--accent-ochre) 0%, var(--accent-fauve) 50%, var(--accent-terracotta) 100%);
+  }
+  .app-header h1 { 
+    font-size: 36px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: var(--text-primary); 
+    line-height: 1.1;
+    margin-bottom: 6px; 
+  }
+  .app-header p { 
+    font-size: 15px; 
+    color: var(--text-secondary); 
+    font-weight: 600;
+  }
+  .handwritten-badge {
+    font-family: var(--font-hand);
+    font-size: 24px;
+    color: var(--accent-terracotta);
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    transform: rotate(-4deg);
+  }
+
+  /* --- Tactile Studio Metrics Grid --- */
+  .grid-2 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+    gap: 16px; 
+    margin-bottom: 2.5rem; 
+  }
+  .stat-card { 
+    background: var(--bg-surface); 
+    border: 2px solid var(--border-thick);
+    padding: 1.25rem; 
+    position: relative;
+    box-shadow: 4px 4px 0px var(--border-thick);
+    transition: transform 0.15s ease;
+  }
+  .stat-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--border-thick);
+  }
+  .stat-label { 
+    font-size: 11px; 
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--text-secondary); 
+    margin-bottom: 6px; 
+  }
+  .stat-val { 
+    font-size: 28px; 
+    font-weight: 800; 
+    color: var(--text-primary);
+  }
+
+  /* --- Blocky Tab Interface --- */
+  nav.tabs { 
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 2.5rem; 
+    flex-wrap: wrap; 
+    border-bottom: 3px solid var(--border-thick);
+    padding-bottom: 8px;
+  }
+  .tab-btn { 
+    padding: 10px 18px; 
+    border: 2px solid var(--border-thick);
+    background: var(--bg-surface); 
+    color: var(--text-primary); 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    box-shadow: 3px 3px 0px var(--border-thick);
+    transition: all 0.15s ease;
+  }
+  .tab-btn:hover { 
+    background-color: var(--bg-muted);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--border-thick);
+  }
+  .tab-btn.active { 
+    color: var(--bg-surface); 
+    background-color: var(--text-primary);
+    box-shadow: 0px 0px 0px var(--border-thick);
+    transform: translate(3px, 3px);
+  }
+
+  /* --- Views Modules --- */
+  .section { display: none; }
+  .section.active { display: block; }
+  
+  /* --- Hand-Cut Block Cards --- */
+  .card { 
+    background: var(--bg-surface); 
+    border: 2px solid var(--border-thick); 
+    padding: 1.75rem; 
+    margin-bottom: 20px; 
+    box-shadow: 4px 4px 0px var(--border-thick);
+  }
+
+  /* --- Dynamic Studio Inputs --- */
+  select, input[type=text] { 
+    width: 100%;
+    padding: 12px 16px; 
+    font-size: 14px; 
+    border: 2px solid var(--border-thick); 
+    background: var(--bg-surface); 
+    color: var(--text-primary); 
+    font-weight: 600;
+    margin-bottom: 1.25rem; 
+    outline: none;
+    box-shadow: 3px 3px 0px var(--border-thick);
+  }
+  select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231C1A17' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  select:focus, input[type=text]:focus {
+    background-color: var(--bg-canvas);
+  }
+
+  @media (min-width: 600px) {
+    select { width: auto; min-width: 280px; margin-right: 12px; }
+  }
+
+  /* --- Woodblock Print Style UI Buttons --- */
+  .btn { 
+    padding: 12px 22px; 
+    border: 2px solid var(--border-thick); 
+    background: var(--bg-surface); 
+    color: var(--text-primary); 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.15s ease; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    box-shadow: 4px 4px 0px var(--border-thick);
+  }
+  .btn:hover { 
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--border-thick);
+    background: var(--bg-muted);
+  }
+  .btn.primary { 
+    background: var(--accent-ochre); 
+    color: var(--text-primary); 
+  }
+  .btn.primary:hover {
+    background: var(--accent-terracotta);
+    color: var(--bg-surface);
+  }
+  .btn.success { background: var(--success-bg); color: var(--success-txt); border-color: var(--success-border); }
+  .btn.danger { background: var(--danger-bg); color: var(--danger-txt); border-color: var(--danger-border); }
+  
+  .btn-row { 
+    display: flex; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+    margin-top: 2rem; 
+  }
+
+  /* --- Expressive Ink Progress Tracks --- */
+  .progress-bar { 
+    height: 6px; 
+    background: var(--bg-muted); 
+    border: 2px solid var(--border-thick);
+    margin-bottom: 1.25rem; 
+  }
+  .progress-fill { 
+    height: 100%; 
+    background: var(--accent-terracotta); 
+    transition: width 0.3s ease; 
+  }
+  .counter { 
+    font-size: 12px; 
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--text-secondary); 
+    margin-bottom: 1.25rem; 
+  }
+
+  /* --- Tactile Portfolio Flashcard Space --- */
+  .fc-area { perspective: 1000px; margin-bottom: 1.5rem; min-height: 280px; }
+  .flashcard { width: 100%; min-height: 280px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  
+  .fc-face { 
+    position: absolute; top: 0; left: 0; width: 100%; min-height: 280px; 
+    backface-visibility: hidden; -webkit-backface-visibility: hidden; 
+    border: 3px solid var(--border-thick); 
+    padding: 2.5rem 2rem; 
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; 
+    background: var(--bg-surface); 
+    box-shadow: 6px 6px 0px var(--border-thick);
+  }
+  .fc-back-face { 
+    transform: rotateY(180deg); 
+    background: var(--bg-canvas); 
+    border-color: var(--accent-fauve);
+    box-shadow: 6px 6px 0px var(--accent-fauve);
+  }
+  .fc-tag { 
+    font-size: 11px; 
+    text-transform: uppercase; 
+    letter-spacing: 0.1em; 
+    color: var(--text-secondary); 
+    font-weight: 800;
+    border-bottom: 2px solid var(--border-thick);
+    padding-bottom: 4px;
+    width: 100%;
+  }
+  .fc-main { 
+    font-size: 22px; 
+    font-weight: 700; 
+    color: var(--text-primary);
+    line-height: 1.4; 
+    margin: 1.5rem 0;
+  }
+  .fc-sub { 
+    font-size: 14px; 
+    color: var(--text-secondary); 
+    line-height: 1.6; 
+    font-style: italic;
+  }
+  .fc-hint { 
+    font-size: 12px; 
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--accent-ochre); 
+    align-self: flex-end;
+    font-family: var(--font-hand);
+    font-size: 18px;
+  }
+
+  /* --- Heavy Studio Catalogue Styling --- */
+  .artist-name { 
+    font-size: 22px; 
+    font-weight: 800; 
+    color: var(--text-primary);
+    margin-bottom: 8px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .artist-detail { 
+    font-size: 14px; 
+    color: var(--text-secondary); 
+    line-height: 1.6; 
+  }
+  .artwork-list-container {
+    margin-top: 1.25rem;
+    border-top: 2px dashed var(--border-thick);
+    padding-top: 0.75rem;
+  }
+  .artwork-item { 
+    padding: 6px 0; 
+    font-size: 14px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .artwork-item::before {
+    content: "🎨";
+    font-size: 12px;
+  }
+  
+  /* --- Sharp Print Placard Metadata Badges --- */
+  .badge { 
+    display: inline-block; 
+    font-size: 11px; 
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 12px; 
+    font-weight: 700; 
+    border: 2px solid var(--border-thick);
+    box-shadow: 2px 2px 0px var(--border-thick);
+  }
+  .badge-theme-1 { background: #FFD166; color: var(--text-primary); }
+  .badge-theme-2 { background: #06D6A0; color: var(--text-primary); }
+  .badge-theme-3 { background: #118AB2; color: #FFFFFF; }
+  .badge-theme-4 { background: #EF476F; color: #FFFFFF; }
+  .badge-theme-5 { background: #8338EC; color: #FFFFFF; }
+  .badge-theme-6 { background: #F77F00; color: #FFFFFF; }
+
+  /* --- Graphic Ink Quiz Options --- */
+  .quiz-opt { 
+    width: 100%; 
+    text-align: left; 
+    padding: 14px 18px; 
+    border: 2px solid var(--border-thick); 
+    background: var(--bg-surface); 
+    color: var(--text-primary); 
+    font-weight: 600;
+    font-size: 14px; 
+    margin-bottom: 12px; 
+    transition: all 0.1s ease; 
+    line-height: 1.5; 
+    box-shadow: 3px 3px 0px var(--border-thick);
+  }
+  .quiz-opt:hover:not([disabled]) { 
+    background: var(--bg-muted); 
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--border-thick);
+  }
+  .quiz-opt.correct { background: var(--success-bg) !important; color: var(--success-txt) !important; border-color: var(--success-border) !important; font-weight: 700; box-shadow: 0px 0px 0px !important; }
+  .quiz-opt.wrong { background: var(--danger-bg) !important; color: var(--danger-txt) !important; border-color: var(--danger-border) !important; box-shadow: 0px 0px 0px !important; }
+  .score-big { font-size: 56px; font-weight: 800; text-align: center; color: var(--accent-terracotta); padding: 1.5rem 0 0.5rem; font-family: var(--font-hand); }
+
+  /* --- Portfolio Workbook Essay Guides --- */
+  .theme-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 16px; 
+    margin-bottom: 1.5rem; 
+  }
+  .theme-pill { 
+    padding: 24px 20px; 
+    border: 2px solid var(--border-thick); 
+    font-size: 15px; 
+    font-weight: 700; 
+    background: var(--bg-surface); 
+    color: var(--text-primary); 
+    text-align: left; 
+    box-shadow: 4px 4px 0px var(--border-thick);
+    transition: all 0.15s ease; 
+    cursor: pointer;
+  }
+  .theme-pill:hover { 
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--border-thick);
+    background-color: var(--bg-canvas);
+  }
+  .essay-step { 
+    border-left: 6px solid var(--accent-terracotta); 
+    padding: 14px 20px; 
+    margin-bottom: 16px; 
+    background: var(--bg-surface); 
+    border-top: 2px solid var(--border-thick);
+    border-right: 2px solid var(--border-thick);
+    border-bottom: 2px solid var(--border-thick);
+    box-shadow: 3px 3px 0px var(--border-thick);
+  }
+  .essay-step h4 { 
+    font-size: 15px; 
+    font-weight: 800; 
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-primary); 
+    margin-bottom: 6px; 
+  }
+  .essay-step p { 
+    font-size: 14px; 
+    color: var(--text-secondary); 
+    line-height: 1.6; 
+  }
+  .q-feedback { 
+    margin-top: 1.5rem; 
+    font-size: 14px; 
+    color: var(--text-primary); 
+    font-weight: 500;
+    line-height: 1.6; 
+    padding: 14px 18px; 
+    background: var(--bg-canvas); 
+    border: 2px dashed var(--border-thick);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="app-header">
+    <h1>Grade 12 Visual Arts</h1>
+    <p>Modules 1–9 Core Syllabus &middot; Exam Preparation Studio</p>
+    <div class="handwritten-badge">Matric Guide!</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="stat-card"><div class="stat-label">Syllabus Artists</div><div class="stat-val">15</div></div>
+    <div class="stat-card"><div class="stat-label">Flashcards</div><div class="stat-val" id="s-cards">—</div></div>
+    <div class="stat-card"><div class="stat-label">Quiz Pool</div><div class="stat-val">10</div></div>
+    <div class="stat-card"><div class="stat-label">Essay Frameworks</div><div class="stat-val">6</div></div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="showTab('flashcards',this)"><i class="ti ti-cards"></i> Flashcards</button>
+    <button class="tab-btn" onclick="showTab('artists',this)"><i class="ti ti-palette"></i> Artist Index</button>
+    <button class="tab-btn" onclick="showTab('quiz',this)"><i class="ti ti-checkbox"></i> Interactive Quiz</button>
+    <button class="tab-btn" onclick="showTab('essay',this)"><i class="ti ti-pencil"></i> Essay Blueprints</button>
+  </nav>
+
+  <!-- FLASHCARDS -->
+  <div id="sec-flashcards" class="section active">
+    <p style="font-size:14px; color:var(--text-secondary); margin-bottom:1.5rem; font-weight: 500;">Select an academic theme below, then flip the block cards to recall key visual configurations and socio-political histories.</p>
+    <select id="theme-sel" onchange="loadTheme()">
+      <option value="0">All Themes (Modules 1–9)</option>
+      <option value="1">Theme 1: Emerging South African Artists</option>
+      <option value="2">Theme 2: Township Life &amp; Human Dignity (Pemba)</option>
+      <option value="3">Theme 3: Social Injustices &amp; Cape Communities (Clarke)</option>
+      <option value="4">Theme 4: Township Life &amp; Empathy (Sekoto)</option>
+      <option value="5">Theme 5: Influence of African &amp; Indigenous Art Forms</option>
+      <option value="6">Theme 6: Art, Craft &amp; Spiritual Artworks (Rural SA)</option>
+    </select>
+    <div class="progress-bar"><div class="progress-fill" id="fc-progress" style="width:0%"></div></div>
+    <div class="counter" id="fc-counter">Card 1 of —</div>
+    
+    <div class="fc-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="fc-face">
+          <div class="fc-tag" id="fc-tag">Artist</div>
+          <div class="fc-main" id="fc-q">Loading...</div>
+          <div class="fc-hint">Tap to reveal artwork details</div>
+        </div>
+        <div class="fc-face fc-back-face">
+          <div class="fc-tag">Core Visual Profile</div>
+          <div class="fc-main" id="fc-a"></div>
+          <div class="fc-sub" id="fc-extra"></div>
+          <div class="fc-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="btn-row">
+      <button class="btn" onclick="prevCard()"><i class="ti ti-arrow-left"></i> Previous</button>
+      <button class="btn primary" onclick="nextCard()">Next <i class="ti ti-arrow-right"></i></button>
+      <button class="btn" onclick="shuffleCards()"><i class="ti ti-refresh"></i> Shuffle Deck</button>
+    </div>
+  </div>
+
+  <!-- ARTIST INDEX -->
+  <div id="sec-artists" class="section">
+    <div style="margin-bottom: 1.5rem;">
+      <input type="text" id="artist-search" placeholder="Type to search artist names, mediums, or notes..." oninput="filterArtists()">
+      <select id="artist-theme-filter" onchange="filterArtists()">
+        <option value="">All Curriculum Themes</option>
+        <option value="Theme 1">Theme 1: Emerging SA Artists</option>
+        <option value="Theme 2">Theme 2: George Pemba Focus</option>
+        <option value="Theme 3">Theme 3: Peter Clarke Focus</option>
+        <option value="Theme 4">Theme 4: Gerard Sekoto Focus</option>
+        <option value="Theme 5">Theme 5: Indigenous/African Influence</option>
+        <option value="Theme 6">Theme 6: Rural Art, Craft &amp; Spirit</option>
+      </select>
+    </div>
+    <div id="artist-list"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="sec-quiz" class="section">
+    <div id="quiz-home">
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:1.5rem; font-weight: 500;">Test your retention on Modules 1–9 structural elements, historical timelines, and stylistic signatures. Press the button below to assemble your 10-question evaluation.</p>
+      <div class="btn-row"><button class="btn primary" onclick="startQuiz()"><i class="ti ti-player-play"></i> Launch Syllabus Quiz</button></div>
+    </div>
+    <div id="quiz-play" style="display:none">
+      <div class="progress-bar"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+      <div class="counter" id="q-counter">Question 1 of 10</div>
+      <div class="card">
+        <p style="font-size:17px; font-weight:700; margin-bottom:1.5rem; line-height:1.4; color:var(--text-primary);" id="q-text"></p>
+        <div id="q-opts"></div>
+        <div id="q-feedback" class="q-feedback" style="display:none"></div>
+      </div>
+      <div class="btn-row"><button class="btn primary" id="q-next-btn" onclick="nextQuestion()" style="display:none">Advance Question <i class="ti ti-arrow-right"></i></button></div>
+    </div>
+    <div id="quiz-results" style="display:none">
+      <div class="card" style="text-align:center">
+        <div class="fc-tag">Evaluation Complete</div>
+        <div class="score-big" id="q-score"></div>
+        <p style="font-size:15px; font-weight: 600; color:var(--text-secondary); margin-top:4px" id="q-verdict"></p>
+      </div>
+      <div id="q-review"></div>
+      <div class="btn-row">
+        <button class="btn primary" onclick="startQuiz()"><i class="ti ti-refresh"></i> Reset Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESSAY GUIDES -->
+  <div id="sec-essay" class="section">
+    <p style="font-size:14px; color:var(--text-secondary); margin-bottom:1.5rem; font-weight: 500;">Structural outline maps tailored precisely for Grade 12 Visual Culture Studies descriptive essays. Select a theme to review specific visual analysis milestones.</p>
+    <div id="essay-menu">
+      <div class="theme-grid" id="essay-theme-grid"></div>
+    </div>
+    <div id="essay-detail" style="display:none">
+      <button class="btn" style="margin-bottom:1.5rem" onclick="backToEssayMenu()"><i class="ti ti-arrow-left"></i> Return to Blueprints</button>
+      <div id="essay-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Curriculum Verified Array - strictly mapping Themes 1-6 explicitly provided in documentation
+const ARTISTS = [
+  { name:"Maggie Laubser", theme:"Theme 1", works:["Harvest Time (1932)"], style:"Expressionism", medium:"Oil on canvas", notes:"Brought German Expressionism back to South Africa. Celebrated rural labor through highly intense, emotive, and completely subjective color palettes[cite: 1]." },
+  { name:"Hugo Naudé", theme:"Theme 1", works:["Western Province Landscape with Yellow Flowers (undated)"], style:"Impressionistic Naturalism", medium:"Oil on canvas", notes:"Merged loose, fluid brushwork and high-texture impasto paint layers with the light qualities of South African open landscapes[cite: 1]." },
+  { name:"J.H. Pierneef", theme:"Theme 1", works:["Die Kloof, Rustenburg (1928)","Bushveld Landscape near Soutpansberg"], style:"Geometric Stylization", medium:"Oil on canvas", notes:"Renowned for structural, geometric reductions of indigenous trees and glowing pink, orange, and blue hues captured from local sun conditions[cite: 1]." },
+  { name:"Moses Tladi", theme:"Theme 1", works:["Crown Mines (1929–1930)"], style:"Traditional Naturalism", medium:"Oil on canvas / board", notes:"First recorded Black artist to exhibit at a South African national gallery venue (1930). Focused on painting industrial mining landscapes[cite: 1]." },
+  { name:"John Koenakeefe Mohl", theme:"Theme 1", works:["Ploughing (1956)"], style:"Representational Realism", medium:"Oil on canvas", notes:"Trained in Germany; painted localized scenes in Sophiatown and rural farms. Advocated passionately for Black self-reliance and art patronage[cite: 1]." },
+  { name:"Gerard Bhengu", theme:"Theme 1", works:["Portrait of an umZulu Man (1990)"], style:"Conservative Naturalism", medium:"Sepia watercolor on paper", notes:"Faced severe financial barriers, restricting his output to limited sepia tones. Documented traditional life across isiBhaca and isiZulu spaces[cite: 1]." },
+  { name:"Gladys Mgudlandlu", theme:"Theme 1", works:["Landscape (1961)"], style:"Primitive Expressionism", medium:"Gouache / ink on board", notes:"One of the first Black women to exhibit fine art in South Africa. Utilized loose, descriptive brushstrokes and contrasting color fields drawn from folklore memory[cite: 1]." },
+  { name:"Michael Zondi", theme:"Theme 1", works:["Standing Woman (1975)"], style:"Figurative Modernist Sculpture", medium:"Carved wood", notes:"Integrated rich Zulu woodcarving lineages with Christian ideals, subtly commenting on the structural containment of human freedom under apart-era legislation[cite: 1]." },
+  { name:"George Pemba", theme:"Theme 2", works:["Terror (1991)","New Brighton Port Elizabeth (1977)","How Long Must I Suffering? (1975)","The Outcast (1945)","Police Raid (1977)"], style:"Social Realism", medium:"Oil on board / canvas", notes:"Documented structural hardships and human dignity within Port Elizabeth townships. Utilized solid planes of color and dark outlines to construct monumental forms[cite: 2]." },
+  { name:"Peter Clarke", theme:"Theme 3", works:["Family Fleeing from Fire (1962)","Wind Blowing on the Cape Flats (1960)","Coming and Going (1960)"], style:"Graphic Non-Naturalism", medium:"Linocut, woodcut prints, gouache", notes:"Captured the deep trauma of forced displacements from the Group Areas Act. Influenced by German Expressionist line work and Japanese print color blocking." },
+  { name:"Gerard Sekoto", theme:"Theme 4", works:["Self-Portrait (1947)","Yellow Houses – Sophiatown (1940)","Portrait of Anna, the Artist’s Mother (1946–1947)","Song of the Pick (1947)","Prison Yard (1944)","Street Scene (1942)","The Wine Drinker (1945)","Washerwomen"], style:"Post-Impressionist Expressionism", medium:"Oil on canvas", notes:"Utilized broad, solid forms with visible directional brushstrokes and non-naturalistic color to generate profound empathy for urban working-class spaces." },
+  { name:"Cecil Skotnes", theme:"Theme 5", works:["Captive (1964)","Figures in a Metaphysical Landscape (1985)"], style:"Abstract Anthropomorphic Woodcarving", medium:"Incised wood panel rubbed with natural oxides", notes:"Pioneered incised wood panel formats rubbed with raw earth oxides. Features highly abstracted mask-like structures inspired by North/West African carvings." },
+  { name:"Alexis Preller", theme:"Theme 5", works:["Grand Mapogga II (1957)"], style:"Symbolic Archetypal Abstraction", medium:"Oil on canvas", notes:"Blended Western painting systems with close structural studies of Ndebele, Swazi, and Zulu homestead layouts to present monumental, pattern-blocked archetypes." },
+  { name:"Azaria Mbatha", theme:"Theme 6", works:["Adam and Eve (undated)"], style:"Two-Dimensional Narrative", medium:"Linocut print on paper", notes:"Trained at Rorke's Drift. Used rich graphic print line contrasts and flat spaces to translate Christian Bible events into local African cultural imagery." },
+  { name:"John Muafangejo", theme:"Theme 6", works:["Mufangejo’s Kraal (1980)","The Battle of Rorke’s Drift (1981)","Judas Iscariot Betrayed Our Lord Jesus for R3.00 (1973)","An Ark Noah (1979)"], style:"Bold Block-Text Narrative Printmaking", medium:"Linocut print", notes:"Acclaimed Rorke's Drift graduate. Integrated rowed patterns, dense black-and-white visual weight shifts, and typographic textual narration boards into the layout." },
+  { name:"Noria Mabasa", theme:"Theme 6", works:["Black Policeman (undated)","People Were Fighting (2012)","Born from Fire (2012)","The Flood (1994)","Mother Feeding Child (1996)","Union Buildings (1999)"], style:"Spiritual Realism", medium:"Pit-fired clay / natural wood logs", notes:"Driven by ancestral dreams. Defied strict gender prohibitions by carving natural logs, keeping their fluid, organic shape intact to map current events." }
+];
+
+const BADGE_CLASS = { "Theme 1":"badge-theme-1", "Theme 2":"badge-theme-2", "Theme 3":"badge-theme-3", "Theme 4":"badge-theme-4", "Theme 5":"badge-theme-5", "Theme 6":"badge-theme-6" };
+const THEME_MAP = { "Theme 1":1, "Theme 2":2, "Theme 3":3, "Theme 4":4, "Theme 5":5, "Theme 6":6 };
+
+const ALL_CARDS = ARTISTS.flatMap(a => [
+  { q:a.name, aMain:a.works.join(" &middot; "), aSub:a.medium, tag:"Artist → Key Visual Evidence", theme:THEME_MAP[a.theme] },
+  { q:a.name, aMain:a.style, aSub:a.notes, tag:"Artist → Context & Stylistic Strategy", theme:THEME_MAP[a.theme] }
+]);
+
+document.getElementById('s-cards').textContent = ALL_CARDS.length;
+
+let fcCards = [...ALL_CARDS], fcIdx = 0, fcFlipped = false;
+
+function loadTheme() {
+  const t = parseInt(document.getElementById('theme-sel').value);
+  fcCards = t === 0 ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.theme === t);
+  fcIdx = 0; fcFlipped = false; updateCard();
+}
+
+function updateCard() {
+  if (!fcCards.length) return;
+  const c = fcCards[fcIdx];
+  document.getElementById('fc-tag').textContent = c.tag;
+  document.getElementById('fc-q').innerHTML = c.q;
+  document.getElementById('fc-a').innerHTML = c.aMain;
+  document.getElementById('fc-extra').innerHTML = c.aSub;
+  document.getElementById('fc-counter').textContent = 'Card ' + (fcIdx+1) + ' of ' + fcCards.length;
+  document.getElementById('fc-progress').style.width = Math.round(((fcIdx+1)/fcCards.length)*100) + '%';
+  document.getElementById('flashcard').classList.toggle('flipped', fcFlipped);
+}
+
+function flipCard() { fcFlipped = !fcFlipped; document.getElementById('flashcard').classList.toggle('flipped', fcFlipped); }
+function nextCard() { fcIdx = (fcIdx+1)%fcCards.length; fcFlipped=false; updateCard(); }
+function prevCard() { fcIdx = (fcIdx-1+fcCards.length)%fcCards.length; fcFlipped=false; updateCard(); }
+function shuffleCards() { for(let i=fcCards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcCards[i],fcCards[j]]=[fcCards[j],fcCards[i]];} fcIdx=0;fcFlipped=false;updateCard(); }
+
+function renderArtists(list) {
+  const div = document.getElementById('artist-list');
+  div.innerHTML = !list.length ? '<p style="font-size:14px;color:var(--text-secondary);font-weight:700;">No curriculum items match your search term.</p>' :
+    list.map(a => `<div class="card">
+      <div class="artist-name">${a.name} <span class="badge ${BADGE_CLASS[a.theme]}">${a.theme}</span></div>
+      <div class="artist-detail" style="margin-bottom:12px; color:var(--text-primary); font-weight:600;">${a.notes}</div>
+      <div class="artist-detail" style="font-size:13px;"><strong style="text-transform:uppercase; font-size:11px; color:var(--text-secondary);">Stylistic Approach:</strong> ${a.style} &nbsp;&middot;&nbsp; <strong style="text-transform:uppercase; font-size:11px; color:var(--text-secondary);">Curriculum Materials:</strong> ${a.medium}</div>
+      <div class="artwork-list-container">${a.works.map(w=>`<div class="artwork-item artist-detail"><em>${w}</em></div>`).join('')}</div>
+    </div>`).join('');
+}
+
+function filterArtists() {
+  const q = document.getElementById('artist-search').value.toLowerCase();
+  const t = document.getElementById('artist-theme-filter').value;
+  renderArtists(ARTISTS.filter(a => (!q || a.name.toLowerCase().includes(q) || a.works.some(w=>w.toLowerCase().includes(q)) || a.notes.toLowerCase().includes(q)) && (!t || a.theme===t)));
+}
+
+// 10 Key Questions Mapping exclusively to Core Syllabus Content Themes 1-6
+const QUIZ_Q = [
+  { q:"Which visual strategy characterizes George Pemba's individual portraits like 'How Long Must I Suffering?' to communicate inner isolation?", opts:["Bright, loose Impressionistic watercolor splashes","Sharp geometric lines mimicking Ndebele homestead murals","Delate spatial and tonal contrasts, setting figures in deep shadow against warm backdrops[cite: 2]","Integrated English banner texts cutting across the composition margins"], ans:2, ex:"Pemba expertly manipulated deep tonal and physical space positioning to register psychological states of societal exclusion under apartheid frameworks[cite: 2]." },
+  { q:"What underlying structural reality restricted Gerard Bhengu to a largely monochromatic sepia watercolor technique?", opts:["A strict decree issued directly by local missionary craft schools","Acute financial barriers limiting access to diverse painting materials[cite: 1]","An artistic dedication to early European Impressionist methodologies","A conceptual choice to align his canvases with traditional rock art patterns"], ans:1, ex:"Bhengu operated under severe systemic financial limitations under the apartheid capitalist art system, leading him to master naturalistic sepia watercolors[cite: 1]." },
+  { q:"How does Noria Mabasa generate multi-figure compositions within her natural wood sculpture framework?", opts:["She casts industrial fiberglass parts into geometric block molds","She follows strict coiling grid maps layout blueprints provided by Rorke's Drift hubs","She retains the natural, twisted log form and markings of found wood to guide the narrative layout","She files the wood down to flat, thin two-dimensional narrative panels"], ans:2, ex:"Mabasa intentionally preserves the natural twists, knots, and organic markings of found marula or Vicks trees to dictate her sculpture stories." },
+  { q:"Which European Post-Impressionist master directly influenced Gerard Sekoto's heavy, emotional translation of localized color applications?", opts:["Edvard Munch's linear patterns","Vincent van Gogh's directional, visible brushwork profiles","Jean-François Millet's naturalistic labor shading profiles","Pablo Picasso's monochromatic cubist fragmentation"], ans:1, ex:"Sekoto merged his early blackboard drawing layouts with Post-Impressionist and Fauvist modes, specifically drawing on Van Gogh's expressive brush strokes." },
+  { q:"What socio-political legislative reality forms the immediate thematic foundation for Peter Clarke's Cape Flats visual records?", opts:["The enforcement of the Group Areas Act forced removals","The colonial expansion of industrial gold mining entities across the Witwatersrand","The localized gender prohibitions blocking women from woodcarving lines","The official opening of ethnographic fine art galleries in Pretoria"], ans:0, ex:"Clarke's structural, angular print work records the immediate trauma and socio-geographic isolation triggered by state-mandated forced removals." },
+  { q:"Cecil Skotnes's unique fine art medium is best categorized by which technical procedure?", opts:["Throwing clay coiled forms over an open fire pit track","Carving lines into wood panels, adding natural earth oxides, and rolling ink across the raised planes","Layering oil paint layers over white grounds to scrape through with metal pins","Filming a sequence of changing charcoal drawings directly onto canvas surfaces"], ans:1, ex:"Skotnes developed an incised wood panel technique rubbed with dry natural oxides and dust to separate his profiles from Eurocentric naturalism." },
+  { q:"John Muafangejo's bold black-and-white printmaking layouts frequently incorporate which specific design component to talk to viewers?", opts:["Deep impasto paint lines applied with thick palette knives","Integrated block-text typographic narrative banners along the margins","Delicate sepia watercolor gradients suggesting naturalistic perspective","Abstract geometric fragments inspired by West African masks"], ans:1, ex:"Muafangejo revolutionized linocut formats by running narrative block-text segments directly into his layered, patterned layouts." },
+  { q:"Who was the first recorded Black South African artist to participate in a formal fine art exhibition space in 1930?", opts:["Gerard Sekoto","Moses Tladi[cite: 1]","John Koenakeefe Mohl","George Pemba"], ans:1, ex:"Moses Tladi was the first recorded Black painter to show fine artwork inside a South African national exhibition venue, presenting 'Crown Mines'[cite: 1]." },
+  { q:"Maggie Laubser's 'Harvest Time (1932)' is built upon the visual strategies of which international modernist methodology?", opts:["Conservative British Academic Naturalism","German Expressionism and intense, subjective color fields[cite: 1]","Japanese Woodblock flat monochromatic layout borders","Impressionistic dappled outdoor lighting textures"], ans:1, ex:"Laubser introduced Expressionism to a conservative local art market, utilizing highly subjective and emotive color applications to depict local work[cite: 1]." },
+  { q:"The Rorke's Drift Art and Craft Center in KwaZulu-Natal supported local rural artists by combining traditional African layouts with:", opts:["European academic oil painting manuals","Swedish textile design and graphic printmaking skills","Industrial steel welding training courses","Digital photography and video performance loops"], ans:1, ex:"Founded by Peder and Ulla Gowenius, Rorke's Drift fused Swedish print/textile design skills with indigenous imagery to help artists build independent income streams." }
+];
+
+let quizPool=[], quizIdx=0, quizScore=0, quizAnswered=false;
+
+function startQuiz() {
+  let pool = [...QUIZ_Q];
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  quizPool=pool.slice(0,10); quizIdx=0; quizScore=0;
+  document.getElementById('quiz-home').style.display='none';
+  document.getElementById('quiz-results').style.display='none';
+  document.getElementById('quiz-play').style.display='';
+  renderQ();
+}
+
+function renderQ() {
+  const q=quizPool[quizIdx]; quizAnswered=false;
+  document.getElementById('q-text').innerHTML=q.q;
+  document.getElementById('q-counter').textContent='Syllabus Milestone '+(quizIdx+1)+' of 10';
+  document.getElementById('q-progress').style.width=Math.round((quizIdx/10)*100)+'%';
+  document.getElementById('q-feedback').style.display='none';
+  document.getElementById('q-next-btn').style.display='none';
+  const opts=document.getElementById('q-opts'); opts.innerHTML='';
+  q.opts.forEach((o,i)=>{ const b=document.createElement('button'); b.className='quiz-opt'; b.innerHTML=o; b.onclick=()=>answerQ(i); opts.appendChild(b); });
+}
+
+function answerQ(i) {
+  if(quizAnswered) return; quizAnswered=true;
+  const q=quizPool[quizIdx];
+  document.querySelectorAll('.quiz-opt').forEach((b,idx)=>{ b.disabled=true; if(idx===q.ans) b.classList.add('correct'); else if(idx===i&&i!==q.ans) b.classList.add('wrong'); });
+  if(i===q.ans) quizScore++;
+  const fb=document.getElementById('q-feedback'); fb.innerHTML=q.ex; fb.style.display='';
+  document.getElementById('q-next-btn').style.display='';
+}
+
+function nextQuestion() { quizIdx++; quizIdx>=quizPool.length ? showResults() : renderQ(); }
+
+function showResults() {
+  document.getElementById('quiz-play').style.display='none';
+  document.getElementById('quiz-results').style.display='';
+  document.getElementById('q-score').textContent=quizScore+'/10';
+  document.getElementById('q-verdict').textContent=quizScore>=8?'Excellent Workbook Comprehension!':'Review the visual evidence files and try again.';
+  const rev=document.getElementById('q-review'); rev.innerHTML='<p style="font-size:12px;font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin:1.5rem 0 12px; border-bottom: 2px solid var(--border-thick); padding-bottom: 4px;">Studio Answer Review</p>';
+  quizPool.forEach((q,i)=>{
+    const d=document.createElement('div'); d.className='card'; d.style.marginBottom='14px';
+    d.innerHTML='<p style="font-size:11px; text-transform:uppercase; font-weight:800; color:var(--text-tertiary); margin-bottom:4px;">Milestone '+(i+1)+'</p><p style="font-size:15px; margin-bottom:10px; font-weight:700; color:var(--text-primary);">'+q.q+'</p><p style="font-size:14px; color:var(--success-txt); font-weight:700;">&#10003; '+q.opts[q.ans]+'</p><p style="font-size:13px; color:var(--text-secondary); margin-top:10px; padding-top:8px; border-top:2px dashed var(--border-thin);">'+q.ex+'</p>';
+    rev.appendChild(d);
+  });
+}
+
+// 6 Structured Essay Frameworks strictly mapping to Themes 1-6
+const ESSAYS = [
+  { title:"Theme 1: Emerging SA Artists Blueprint", icon:"ti-palette", steps:[
+    {h:"Introduction & Colonial Barriers",b:"Identify early 20th-century transitions[cite: 1]. Detail systemic colonial limits, white-dominated capitalist art networks, and how artists like Moses Tladi (Crown Mines) or Mohl maintained localized identity[cite: 1]."},
+    {h:"Formal Analysis: Naturalism vs Expressionism",b:"Contrast Bhengu’s financial sepia color limits with Laubser’s intense, subjective expressionist color choices or Gladys Mgudlandlu’s memory-drawn primitive line works[cite: 1]."},
+    {h:"Synthesis & Core Argument",b:"Explain how these early configurations broke away from conservative British landscape academic painting to establish distinct indigenous observations[cite: 1]."}
+  ]},
+  { title:"Theme 2: George Pemba Focus Blueprint", icon:"ti-user", steps:[
+    {h:"Socio-Political Setting under Apartheid",b:"Frame the mid-to-late 20th-century township background[cite: 2]. Note how Pemba documented systemic instability, forced relocations, and political terror (Terror, 1991)[cite: 2]."},
+    {h:"Formal Attributes & Volume Generation",b:"Analyze Pemba’s transition to oil paint. Focus on his robust, monumental rounded masses, clear dark borders, and flat fields of contrasting pigments[cite: 2]."},
+    {h:"Psychological Spatial Isolation Strategy",b:"Explain how individual compositions (How Long Must I Suffering?) use high tonal contrasts and shadowed figures to visual track internal emotional isolation[cite: 2]."}
+  ]},
+  { title:"Theme 3: Peter Clarke Focus Blueprint", icon:"ti-crop", steps:[
+    {h:"Group Areas Act Displacements",b:"Detail the historical trauma of forced removals moving working-class colored communities into the desolate sand zones of the Cape Flats."},
+    {h:"Graphic Medium & Line Work Actions",b:"Deconstruct Clarke’s graphic linocut, woodcut, and gouache strategies. Note his angular, stylized shapes and crisp decorative repeat forms."},
+    {h:"Symbolic Landscape Elements",b:"Unpack visual metaphors like high horizon placements, stark barrens, and sharp spiked cacti (Coming and Going) that reflect social environmental hostility."}
+  ]},
+  { title:"Theme 4: Gerard Sekoto Focus Blueprint", icon:"ti-mood-boy", steps:[
+    {h:"Pre-Demolition Urban Enclaves",b:"Frame life within vibrant multicultural communities like Sophiatown before mass state evictions. Detail structural inequality vs shared community spaces."},
+    {h:"Post-Impressionist Marks & Empathy Color",b:"Analyze Sekoto's simplified masses, blurred edge properties, and highly visible, rhythmic directional brush paths derived from Van Gogh's style."},
+    {h:"Collective Labor Patterning vs Authority",b:"Deconstruct political entries like 'Song of the Pick'. Explain how claustrophobic diagonal axes and repeated human profiles track unified working-class power vs a lone supervisor figure."}
+  ]},
+  { title:"Theme 5: Indigenous & African Forms Blueprint", icon:"ti-layers-difference", steps:[
+    {h:"Subverting Ethnographic Colonial Framing",b:"Analyze the shift from displaying functional/ritual African objects in Western museums as craft to acknowledging them as high modernist fine art."},
+    {h:"Cecil Skotnes Panel Incision Methods",b:"Deconstruct the technique of cutting wood blocks, rubbing surfaces with natural earth oxides, and overlaying black ink to produce anthropomorphic mask-style figures."},
+    {h:"Alexis Preller Archetypal Geometric Patterns",b:"Deconstruct how Preller studied amaNdebele and Zulu homestead walls (Grand Mapogga II) to transform individual figures into monument-blocked cultural icons."}
+  ]},
+  { title:"Theme 6: Rural Art, Craft & Spirit Blueprint", icon:"ti-flame", steps:[
+    {h:"Rorke's Drift Center & Communal Survival",b:"Detail how self-taught rural artists preserved ancestral knowledge lines outside urban art galleries, utilizing centers like Rorke’s Drift for economic viability."},
+    {h:"Linocut Narrative & Visual Banners",b:"Analyze Azaria Mbatha and John Muafangejo's structural print styles. Note Muafangejo's rowed repeating cattle patterns and integrated typographic story text panels."},
+    {h:"Noria Mabasa: Dual-Medium Materiality",b:"Contrast Mabasa's pit-fired coil clay figures with her natural log sculptures. Explain how keeping organic wood splits and holes intact directly dictates her multi-figure layouts."}
+  ]}
+];
+
+function renderEssayMenu() {
+  const g=document.getElementById('essay-theme-grid');
+  if(g.children.length) return;
+  ESSAYS.forEach((e,i)=>{
+    const b=document.createElement('button'); b.className='theme-pill';
+    b.innerHTML='<i class="ti '+e.icon+'" style="font-size:24px; display:block; margin-bottom:12px; color:var(--accent-terracotta);"></i>'+e.title;
+    b.onclick=()=>showEssay(i); g.appendChild(b);
+  });
+}
+
+function showEssay(i) {
+  const g=ESSAYS[i];
+  document.getElementById('essay-content').innerHTML='<h2 style="font-size:22px; font-weight:800; margin-bottom:1.5rem; text-transform:uppercase; color:var(--text-primary); border-bottom:3px solid var(--border-thick); padding-bottom:6px;">'+g.title+'</h2>'+
+    g.steps.map(s=>'<div class="essay-step"><h4>'+s.h+'</h4><p>'+s.b+'</p></div>').join('');
+  document.getElementById('essay-menu').style.display='none';
+  document.getElementById('essay-detail').style.display='';
+}
+
+function backToEssayMenu() {
+  document.getElementById('essay-menu').style.display='';
+  document.getElementById('essay-detail').style.display='none';
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='artists') renderArtists(ARTISTS);
+  if(id==='essay') renderEssayMenu();
+}
+
+updateCard();
+</script>
+</body>
+</html>
